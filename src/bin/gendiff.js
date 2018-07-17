@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
-import program from '../index';
+import genDiff, { program } from '..';
 
+program.action((firstConfig, secondConfig) => console.log(genDiff(firstConfig, secondConfig)));
 program.parse(process.argv);
+
+export default genDiff;

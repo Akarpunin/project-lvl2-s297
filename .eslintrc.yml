@@ -2,6 +2,7 @@
 
 extends:
    - 'airbnb-base'
+   - 'plugin:jest/recommended'
 
 env:
    node: true
