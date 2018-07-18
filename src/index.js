@@ -1,14 +1,19 @@
 import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
+import ini from 'ini';
 import _ from 'lodash';
+
+const mapping = {
+  '.json': file => JSON.parse(file),
+  '.yml': file => yaml.safeLoad(file),
+  '.ini': file => ini.parse(file),
+};
 
 const getObject = (pathToFile) => {
   const fileContent = fs.readFileSync(pathToFile, 'utf-8');
-  if (path.extname(pathToFile) === '.json') {
-    return JSON.parse(fileContent);
-  }
-  return yaml.safeLoad(fileContent);
+  const extension = path.extname(pathToFile);
+  return mapping[extension](fileContent);
 };
 
 const genDiff = (pathToFile1, pathToFile2) => {
