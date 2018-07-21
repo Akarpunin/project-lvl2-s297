@@ -1,5 +1,5 @@
 import fs from 'fs';
-import genDiff from '../src/';
+import genDiff from '../src/parseContent';
 
 test('test json', () => {
   const pathToFile1 = '__tests__/__fixtures__/before.json';
@@ -27,4 +27,11 @@ test('test json plain', () => {
   const pathToFile2 = '__tests__/__fixtures__/after.json';
   const expected = (fs.readFileSync('__tests__/__fixtures__/expectedPlain', 'utf-8')).trim();
   expect(genDiff(pathToFile1, pathToFile2, 'plain')).toBe(expected);
+});
+
+test('test json json', () => {
+  const pathToFile1 = '__tests__/__fixtures__/before.json';
+  const pathToFile2 = '__tests__/__fixtures__/after.json';
+  const expected = (fs.readFileSync('__tests__/__fixtures__/expectedJson', 'utf-8')).trim();
+  expect(genDiff(pathToFile1, pathToFile2, 'json')).toBe(expected);
 });

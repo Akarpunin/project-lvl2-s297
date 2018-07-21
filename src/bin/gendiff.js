@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import program from 'commander';
-import genDiff from '..';
+import genDiff from '../parseContent';
 // import { version } from '../../package.json';
 
 program
