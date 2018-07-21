@@ -57,4 +57,13 @@ const renderPlain = (ast, acc = 'Property \'') => {
 
 const renderJson = ast => JSON.stringify(ast);
 
-export { renderTree, renderPlain, renderJson };
+const getRenderFunction = (renderMethod) => {
+  const mapping = {
+    tree: renderTree,
+    plain: renderPlain,
+    json: renderJson,
+  };
+  return mapping[renderMethod];
+};
+
+export default getRenderFunction;

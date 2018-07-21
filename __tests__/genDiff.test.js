@@ -1,5 +1,5 @@
 import fs from 'fs';
-import genDiff from '../src/parseContent';
+import genDiff from '../src/';
 
 test('test json', () => {
   const pathToFile1 = '__tests__/__fixtures__/before.json';
