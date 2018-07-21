@@ -1,13 +1,20 @@
 import _ from 'lodash';
 
+const valueTypes = [
+  {
+    check: (node, key) => (node[key] instanceof Object),
+    process: (node, key, indent, func) => `  ${key}: ${func(node[key], `${indent}    `)}`,
+  },
+  {
+    check: (node, key) => (!(node[key] instanceof Object)),
+    process: (node, key) => `  ${key}: ${node[key]}`,
+  },
+];
+
 const stringify = (node, indent) => {
   if (node instanceof Object) {
-    const result = Object.keys(node).map((key) => {
-      if (node[key] instanceof Object) {
-        return `  ${key}: ${stringify(node[key], `${indent}    `)}`;
-      }
-      return `  ${key}: ${node[key]}`;
-    });
+    const result = Object.keys(node).map(key =>
+      valueTypes.find(element => (element.check(node, key))).process(node, key, indent, stringify));
     return `{\n${indent}  ${result.join(`\n${indent}  `)}\n${indent}}`;
   }
   return node;

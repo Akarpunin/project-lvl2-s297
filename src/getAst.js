@@ -4,7 +4,7 @@ const nodeTypes = [
   {
     type: 'parent',
     check: (key, obj1, obj2) => ((_.has(obj1, key) && _.has(obj2, key)) &&
-       ((obj1[key] instanceof Object) && (obj2[key] instanceof Object))),
+      ((obj1[key] instanceof Object) && (obj2[key] instanceof Object))),
     process: (obj1, obj2, func) => ({ children: func(obj1, obj2) }),
   },
   {
@@ -16,7 +16,7 @@ const nodeTypes = [
   {
     type: 'changed',
     check: (key, obj1, obj2) => ((_.has(obj1, key) && _.has(obj2, key)) &&
-    (obj1[key] !== obj2[key])),
+      (obj1[key] !== obj2[key])),
     process: (obj1, obj2) => ({ oldValue: obj1, newValue: obj2 }),
   },
   {
