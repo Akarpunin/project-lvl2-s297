@@ -26,7 +26,7 @@ const nodeTypes = [
     process: (node, indent, func) => `  ${node.name}: ${func(node.children, indent)}`,
   },
   {
-    type: 'not changed',
+    type: 'unchanged',
     process: (node, indent) => `  ${node.name}: ${stringify(node.oldValue, indent)}`,
   },
   {

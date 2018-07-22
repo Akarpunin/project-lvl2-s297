@@ -21,7 +21,7 @@ const nodeTypes = [
 ];
 
 const render = (ast, acc = 'Property \'') => {
-  const result = ast.filter(obj => (obj.type !== 'not changed')).map(obj =>
+  const result = ast.filter(obj => (obj.type !== 'unchanged')).map(obj =>
     nodeTypes.find(element => (element.type === obj.type)).process(obj, acc, render));
   return result.join('\n');
 };
