@@ -12,12 +12,12 @@ const valueTypes = [
 ];
 
 const stringify = (node, indent) => {
-  if (node instanceof Object) {
-    const result = Object.keys(node).map(key =>
-      valueTypes.find(element => (element.check(node, key))).process(node, key, indent, stringify));
-    return `{\n${indent}  ${result.join(`\n${indent}  `)}\n${indent}}`;
+  if (!(node instanceof Object)) {
+    return node;
   }
-  return node;
+  const result = Object.keys(node).map(key =>
+    valueTypes.find(element => (element.check(node, key))).process(node, key, indent, stringify));
+  return `{\n${indent}  ${result.join(`\n${indent}  `)}\n${indent}}`;
 };
 
 const nodeTypes = [

@@ -7,10 +7,6 @@ const nodeTypes = [
     process: (node, acc, func) => func(node.children, `${acc}${node.name}.`),
   },
   {
-    type: 'not changed',
-    process: () => '',
-  },
-  {
     type: 'changed',
     process: (node, acc) => `${acc}${node.name}' was updated. From ${stringify(node.oldValue)} to ${stringify(node.newValue)}`,
   },
@@ -25,9 +21,9 @@ const nodeTypes = [
 ];
 
 const render = (ast, acc = 'Property \'') => {
-  const result = ast.map(obj =>
+  const result = ast.filter(obj => (obj.type !== 'not changed')).map(obj =>
     nodeTypes.find(element => (element.type === obj.type)).process(obj, acc, render));
-  return result.filter(value => (value !== '')).join('\n');
+  return result.join('\n');
 };
 
 export default render;
