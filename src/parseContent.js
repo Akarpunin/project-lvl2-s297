@@ -1,5 +1,3 @@
-import fs from 'fs';
-import path from 'path';
 import yaml from 'js-yaml';
 import ini from 'ini';
 
@@ -12,10 +10,4 @@ const parseContent = (content, extension) => {
   return mapping[extension](content);
 };
 
-const getObject = (pathToFile) => {
-  const content = fs.readFileSync(pathToFile, 'utf-8');
-  const extension = path.extname(pathToFile);
-  return parseContent(content, extension);
-};
-
-export default getObject;
+export default parseContent;
